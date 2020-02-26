@@ -1,6 +1,17 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:qdd/routes/application.dart';
+import 'package:qdd/routes/routes.dart';
 
-void main() => runApp(MyApp());
+//void main() => runApp(MyApp());
+void main(){
+  Router router = Router() ;
+  Routes.configureRoutes(router);
+  Application.router = router ;
+  
+  runApp(MyApp());
+}
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -10,7 +21,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      onGenerateRoute: Application.router.generator,
+      //home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }

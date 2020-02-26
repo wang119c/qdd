@@ -2,6 +2,9 @@
 
 电子印章&#x2F;电子签名&#x2F;电子合同
 
+
+开发版本 Flutter 1.12.13+hotfix.8
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
