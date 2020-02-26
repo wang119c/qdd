@@ -11,20 +11,29 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  int _countNum = 3;
+  Timer _countTimer;
+
   @override
   void initState() {
     super.initState();
-    Timer timer = new Timer(new Duration(seconds: 3), () {
-      Application.router.navigateTo(context, Routes.home , replace: true);
+    _countTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_countNum <= 0) {
+          _countTimer.cancel();
+          Application.router.navigateTo(context, Routes.home, replace: true);
+        } else {
+          _countNum -= 1;
+        }
+      });
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("测试启动页面"),
+        child: Text("测试启动页面${_countNum}"),
       ),
     );
   }
