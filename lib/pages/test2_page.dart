@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qdd/utils/fluro_conver_util.dart';
+import 'package:qdd/utils/storage_qdd_util.dart';
 
 class Test2Page extends StatefulWidget {
   final String name;
@@ -19,17 +20,45 @@ class Test2Page extends StatefulWidget {
 }
 
 class _Test2PageState extends State<Test2Page> {
+  String _counter ;
+
+
   @override
   Widget build(BuildContext context) {
     String mName = widget.name;
     Map<String, dynamic> person =
         FluroConvertUtils.string2map(widget.personJson);
-    print(person['name']);
 
     return Scaffold(
-      body: Center(
-        child: Text("测试"),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Center(
+            child: RaisedButton(
+                onPressed: _incrementCounter, child: Text('Increment Counter')),
+          ),
+          Divider(
+            height: 10,
+          ),
+          Container(
+            child: Text("${_counter}"),
+          )
+        ],
       ),
     );
+  }
+
+  void _incrementCounter() async {
+    String counter = await StorageQddUtil.getString("counter");
+    if (counter == null) {
+      print(222);
+      await StorageQddUtil.setString("counter", "ok");
+    } else {
+      print(counter);
+    }
+    setState(() {
+      _counter = counter ;
+    });
   }
 }
