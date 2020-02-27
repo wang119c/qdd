@@ -1,7 +1,9 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:qdd/model/Person.dart';
 import 'package:qdd/routes/application.dart';
 import 'package:qdd/routes/routes.dart';
+import 'package:qdd/utils/fluro_conver_util.dart';
 
 /// 钱多多整个项目的导航
 class NavigatorQdd {
@@ -26,6 +28,15 @@ class NavigatorQdd {
   static void goTestPage(BuildContext context ){
     Application.router.navigateTo(context, Routes.test,transition: TransitionType.inFromRight);
   }
+
+  static void goTest2Page(BuildContext context ,  String  name , int  age , double score , bool sex , Person person  ){
+    String personjson = FluroConvertUtils.object2string(person);
+    debugPrint(personjson);
+
+
+    Application.router.navigateTo(context, Routes.test2 + "?name=${name}&age=${age}&score=${score}&sex=${sex}&personjson=${personjson}", transition:  TransitionType.inFromRight);
+  }
+
 
 //  /// 跳转到 传参demo 页面
 //  static void goDemoParamsPage(BuildContext context, String name, int age,
