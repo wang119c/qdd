@@ -22,6 +22,15 @@ class Test2Page extends StatefulWidget {
 class _Test2PageState extends State<Test2Page> {
   String _counter ;
 
+  @override
+  void initState() {
+    super.initState();
+
+
+
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +52,12 @@ class _Test2PageState extends State<Test2Page> {
           ),
           Container(
             child: Text("${_counter}"),
+          ),
+          Divider(
+            height: 10,
+          ),
+          Container(
+            child: Text(""),
           )
         ],
       ),

@@ -26,14 +26,4 @@ class StorageQddUtil{
     SharedPreferences sp = await SharedPreferences.getInstance();
     sp.clear();
   }
-
-
-
-
-
-
-
-
-
-
 }
