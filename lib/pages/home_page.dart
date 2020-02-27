@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
@@ -14,29 +16,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-//  var  _subscription ;
+  StreamSubscription<ConnectivityResult> _subscription;
 
   @override
   void initState() {
     super.initState();
-    _checkNetWork();
-  }
 
-  /// 检测网络信号
-  void _checkNetWork() async {
-    String network = await ConnectivityQddUtil.getNetWork();
-    if (network == "wifi") {
-      //todo
-    } else if (network == "mobile") {
-      // todo
-    } else {
-      print("没有网络信号");
-    }
+
+    /// 检测网络信号
+    _subscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      if (result == ConnectivityResult.mobile) {
+        print("mobile");
+      } else if (result == ConnectivityResult.wifi) {
+        print("wifi");
+      }
+    });
   }
 
   @override
   void dispose() {
-//    _subscription.cancel();
+    _subscription.cancel();
     super.dispose();
   }
 

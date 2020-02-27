@@ -31,9 +31,6 @@ class NavigatorQdd {
 
   static void goTest2Page(BuildContext context ,  String  name , int  age , double score , bool sex , Person person  ){
     String personjson = FluroConvertUtils.object2string(person);
-    debugPrint(personjson);
-
-
     Application.router.navigateTo(context, Routes.test2 + "?name=${name}&age=${age}&score=${score}&sex=${sex}&personjson=${personjson}", transition:  TransitionType.inFromRight);
   }
 
