@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:qdd/config/service_url.dart';
 import 'package:qdd/model/Person.dart';
 import 'package:qdd/pages/test3_page.dart';
 import 'package:qdd/routes/application.dart';
 import 'package:qdd/routes/navigator_qdd.dart';
 import 'package:qdd/routes/routes.dart';
+import 'package:qdd/service/http.dart';
 import 'package:qdd/utils/connectivity_qdd_util.dart';
 import 'package:qdd/utils/device_info_util.dart';
 
@@ -23,6 +25,14 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
+    var data = Http.get("http://www.phonegap100.com/appapi.php" , queryParameters: {
+      "a" : "getPortalList" ,
+      "catid" : 20 ,
+      "page" : 1
+    });
+//    var data = Http.get(ServiceUrl.home);
+//    print(data);
+    
 
     /// 检测网络信号
     _subscription = Connectivity()
@@ -71,6 +81,8 @@ class _HomePageState extends State<HomePage> {
             FlatButton(
               child: Text("测试加载远程html"),
               onPressed: () {
+             
+                
                  Navigator.push(context, new MaterialPageRoute(builder: (context) => new Test3Page()));
               },
             )
