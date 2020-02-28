@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:qdd/providers/Counter.dart';
 import 'package:qdd/utils/screen_qdd_util.dart';
 import 'package:qdd/event/events.dart';
 
@@ -22,6 +24,7 @@ class _TestPageState extends State<TestPage>
   @override
   Widget build(BuildContext context) {
     ScreenQddUtil.init(context);
+    var counterProvider = Provider.of<Counter>(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -56,6 +59,7 @@ class _TestPageState extends State<TestPage>
                 )
               ],
             ),
+            Text("${counterProvider.count}"),
             Text('设备宽度:${ScreenQddUtil.getScreenWidth}px'),
             Text('设备高度:${ScreenQddUtil.getScreenHeight}px'),
             Text('设备宽度:${ScreenQddUtil.getScreenWidthDp}dp'),

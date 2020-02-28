@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:qdd/providers/Counter.dart';
 import 'package:qdd/utils/fluro_conver_util.dart';
 import 'package:qdd/utils/storage_qdd_util.dart';
 import 'package:qdd/event/events.dart';
@@ -51,6 +53,8 @@ class _Test2PageState extends State<Test2Page> {
     Map<String, dynamic> person =
         FluroConvertUtils.string2map(widget.personJson);
 
+    var counterProvider = Provider.of<Counter>(context);
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +74,7 @@ class _Test2PageState extends State<Test2Page> {
             height: 10,
           ),
           Container(
-            child: Text(""),
+            child: Text("${counterProvider.count}"),
           ),
           Container(
             child: Text("事件监听"),
@@ -88,8 +92,14 @@ class _Test2PageState extends State<Test2Page> {
                 eventBus.fire(MyEventA("hello"));
               },
             ),
-          )
+          ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Text("测试provider"),
+        onPressed: () {
+          counterProvider.increment();
+        },
       ),
     );
   }
