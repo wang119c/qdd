@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qdd/providers/Counter.dart';
+import 'package:qdd/providers/counter.dart';
 import 'package:qdd/utils/screen_qdd_util.dart';
 import 'package:qdd/event/events.dart';
 

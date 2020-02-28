@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qdd/providers/Counter.dart';
+import 'package:qdd/providers/cart.dart';
+import 'package:qdd/providers/counter.dart';
 import 'package:qdd/utils/fluro_conver_util.dart';
 import 'package:qdd/utils/storage_qdd_util.dart';
 import 'package:qdd/event/events.dart';
@@ -54,11 +55,9 @@ class _Test2PageState extends State<Test2Page> {
         FluroConvertUtils.string2map(widget.personJson);
 
     var counterProvider = Provider.of<Counter>(context);
-
+    var cartProvider = Provider.of<Cart>(context);
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body: ListView(
         children: <Widget>[
           Center(
             child: RaisedButton(
@@ -93,12 +92,22 @@ class _Test2PageState extends State<Test2Page> {
               },
             ),
           ),
+          Column(
+            children: <Widget>[
+              CartItem(),
+              Divider(
+                height: 10,
+              ),
+              CartNum()
+            ],
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(
         child: Text("测试provider"),
         onPressed: () {
           counterProvider.increment();
+          cartProvider.addData("haha");
         },
       ),
     );
@@ -115,5 +124,45 @@ class _Test2PageState extends State<Test2Page> {
     setState(() {
       _counter = counter;
     });
+  }
+}
+
+class CartItem extends StatefulWidget {
+  @override
+  _CartItemState createState() => _CartItemState();
+}
+
+class _CartItemState extends State<CartItem> {
+  @override
+  Widget build(BuildContext context) {
+    var cartProvider = Provider.of<Cart>(context);
+
+    return cartProvider.cartList.length > 0
+        ? Column(
+            children: cartProvider.cartList.map((value) {
+            return ListTile(
+              title: Text("子组件${value}"),
+              trailing: InkWell(
+                child: Icon(Icons.delete),
+                onTap: (){
+                  cartProvider.delData(value);
+                },
+              ),
+            );
+          }).toList())
+        : Text("数据为空");
+  }
+}
+
+class CartNum extends StatefulWidget {
+  @override
+  _CartNumState createState() => _CartNumState();
+}
+
+class _CartNumState extends State<CartNum> {
+  @override
+  Widget build(BuildContext context) {
+    var cartProvider = Provider.of<Cart>(context);
+    return Text("数量${cartProvider.cartNum}");
   }
 }
