@@ -4,6 +4,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:qdd/model/Person.dart';
+import 'package:qdd/pages/test3_page.dart';
 import 'package:qdd/routes/application.dart';
 import 'package:qdd/routes/navigator_qdd.dart';
 import 'package:qdd/routes/routes.dart';
@@ -65,6 +66,12 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 NavigatorQdd.goTest2Page(context, "test", 1, 1.1, true,
                     Person(name: 'Zeking', age: 18, sex: true));
+              },
+            ),
+            FlatButton(
+              child: Text("测试加载远程html"),
+              onPressed: () {
+                 Navigator.push(context, new MaterialPageRoute(builder: (context) => new Test3Page()));
               },
             )
           ],

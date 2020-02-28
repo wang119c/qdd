@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qdd/providers/cart.dart';
@@ -92,6 +94,15 @@ class _Test2PageState extends State<Test2Page> {
               },
             ),
           ),
+          Divider(
+            height: 10,
+          ),
+          Container(
+            child: RaisedButton(
+              child: Text("请求数据"),
+              onPressed: _getData,
+            ),
+          ),
           Column(
             children: <Widget>[
               CartItem(),
@@ -100,7 +111,7 @@ class _Test2PageState extends State<Test2Page> {
               ),
               CartNum()
             ],
-          )
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -112,6 +123,14 @@ class _Test2PageState extends State<Test2Page> {
       ),
     );
   }
+
+  void _getData() async{
+    var apiUrl = "http://www.phonegap100.com/appapi.php?a=getPortalList&catid=20&page=1";
+    Response response = await Dio().get(apiUrl);
+    var data = json.decode(response.data) ;
+    print(  data['result'][0]['aid'] );
+  }
+
 
   void _incrementCounter() async {
     String counter = await StorageQddUtil.getString("counter");
@@ -144,7 +163,7 @@ class _CartItemState extends State<CartItem> {
               title: Text("子组件${value}"),
               trailing: InkWell(
                 child: Icon(Icons.delete),
-                onTap: (){
+                onTap: () {
                   cartProvider.delData(value);
                 },
               ),
