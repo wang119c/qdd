@@ -33,6 +33,11 @@ class _HomePageState extends State<HomePage> {
         print("wifi");
       }
     });
+
+
+
+
+
   }
 
   @override
@@ -44,8 +49,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Row(
+      body:Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             FlatButton(
               child: Text("测试页面自适应的屏幕"),
@@ -55,7 +61,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             FlatButton(
-              child: Text("测试本地缓存"),
+              child: Text("测试本地缓存/传值/事件广播"),
               onPressed: () {
                 NavigatorQdd.goTest2Page(context, "test", 1, 1.1, true,
                     Person(name: 'Zeking', age: 18, sex: true));
@@ -63,7 +69,6 @@ class _HomePageState extends State<HomePage> {
             )
           ],
         ),
-      ),
     );
   }
 }

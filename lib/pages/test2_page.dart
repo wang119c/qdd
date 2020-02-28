@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:qdd/utils/fluro_conver_util.dart';
 import 'package:qdd/utils/storage_qdd_util.dart';
+import 'package:qdd/event/events.dart';
 
 class Test2Page extends StatefulWidget {
   final String name;
@@ -20,17 +22,28 @@ class Test2Page extends StatefulWidget {
 }
 
 class _Test2PageState extends State<Test2Page> {
-  String _counter ;
+  String _counter;
+  StreamSubscription<MyEventA> myEventA;
+  Color _test = Colors.black;
 
   @override
   void initState() {
     super.initState();
 
-
-
+    //监听广播
+    myEventA = eventBus.on<MyEventA>().listen((event) {
+      print(event);
+      setState(() {
+        _test = Colors.blue;
+      });
+    });
   }
 
-
+  @override
+  void dispose() {
+    myEventA.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +71,23 @@ class _Test2PageState extends State<Test2Page> {
           ),
           Container(
             child: Text(""),
+          ),
+          Container(
+            child: Text("事件监听"),
+            width: double.infinity,
+            height: 200.0,
+            color: _test,
+          ),
+          Divider(
+            height: 10,
+          ),
+          Container(
+            child: FlatButton(
+              child: Text("发送事件广播"),
+              onPressed: () {
+                eventBus.fire(MyEventA("hello"));
+              },
+            ),
           )
         ],
       ),
@@ -73,7 +103,7 @@ class _Test2PageState extends State<Test2Page> {
       print(counter);
     }
     setState(() {
-      _counter = counter ;
+      _counter = counter;
     });
   }
 }

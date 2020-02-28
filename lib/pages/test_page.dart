@@ -1,17 +1,27 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qdd/utils/screen_qdd_util.dart';
+import 'package:qdd/event/events.dart';
 
 class TestPage extends StatefulWidget {
   @override
   _TestPageState createState() => _TestPageState();
 }
 
-class _TestPageState extends State<TestPage> {
+class _TestPageState extends State<TestPage>
+    with AutomaticKeepAliveClientMixin {
+  StreamSubscription<MyEventA> myEventA;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    ScreenQddUtil.init(context) ;
+    ScreenQddUtil.init(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -27,7 +37,7 @@ class _TestPageState extends State<TestPage> {
                   color: Colors.red,
                   child: Text(
                     '我的宽度:${ScreenQddUtil.setWidth(375)}dp \n'
-                        '我的高度:${ScreenQddUtil.setHeight(200)}dp',
+                    '我的高度:${ScreenQddUtil.setHeight(200)}dp',
                     style: TextStyle(
                         color: Colors.white, fontSize: ScreenQddUtil.setSp(24)),
                   ),
@@ -39,7 +49,7 @@ class _TestPageState extends State<TestPage> {
                   color: Colors.blue,
                   child: Text(
                       '我的宽度:${ScreenQddUtil.setWidth(375)}dp \n'
-                          '我的高度:${ScreenQddUtil.setHeight(200)}dp',
+                      '我的高度:${ScreenQddUtil.setHeight(200)}dp',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: ScreenQddUtil.setSp(24))),
@@ -76,8 +86,8 @@ class _TestPageState extends State<TestPage> {
                 Text('我的文字大小在设计稿上是24px，会随着系统的文字缩放比例变化',
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: ScreenQddUtil
-                            .setSp(24, allowFontScalingSelf: true))),
+                        fontSize: ScreenQddUtil.setSp(24,
+                            allowFontScalingSelf: true))),
               ],
             )
           ],
@@ -86,7 +96,6 @@ class _TestPageState extends State<TestPage> {
     );
   }
 
-
-
-
+  @override
+  bool get wantKeepAlive => true;
 }

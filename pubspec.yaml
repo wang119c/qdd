@@ -31,6 +31,7 @@ dependencies:
   device_info: ^0.4.1+5
   flutter_screenutil: ^1.0.2
   connectivity: ^0.4.8+1
+  event_bus: ^1.1.1
 
 dev_dependencies:
   flutter_test:
