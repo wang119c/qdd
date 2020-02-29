@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 class Http {
-  static Future get(url, {queryParameters}) async {
+  static Future<Map<String, dynamic>> get(url, {queryParameters}) async {
     try {
       Response response;
       Dio dio = Dio();
@@ -14,12 +14,14 @@ class Http {
 //    };
       response = await dio.get(url, queryParameters: queryParameters);
       if (response.statusCode == 200) {
+        //print(response.data is Map);
         return response.data;
       } else {
         throw Exception("接口出现问题");
       }
     } catch (e) {
-      return print("error");
+      throw Exception("error");
+//       print("error");
     }
   }
 }

@@ -1,13 +1,13 @@
 class ProductModel {
-  List<Result> result;
+  List<ProductItemModel> result;
 
   ProductModel({this.result});
 
   ProductModel.fromJson(Map<String, dynamic> json) {
     if (json['result'] != null) {
-      result = new List<Result>();
+      result = new List<ProductItemModel>();
       json['result'].forEach((v) {
-        result.add(new Result.fromJson(v));
+        result.add(new ProductItemModel.fromJson(v));
       });
     }
   }
@@ -21,7 +21,7 @@ class ProductModel {
   }
 }
 
-class Result {
+class ProductItemModel {
   String sId;
   String title;
   String cid;
@@ -30,16 +30,16 @@ class Result {
   String pic;
   String sPic;
 
-  Result(
+  ProductItemModel(
       {this.sId,
-        this.title,
-        this.cid,
-        this.price,
-        this.oldPrice,
-        this.pic,
-        this.sPic});
+      this.title,
+      this.cid,
+      this.price,
+      this.oldPrice,
+      this.pic,
+      this.sPic});
 
-  Result.fromJson(Map<String, dynamic> json) {
+  ProductItemModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     title = json['title'];
     cid = json['cid'];
