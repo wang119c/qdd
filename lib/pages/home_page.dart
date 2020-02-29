@@ -13,6 +13,7 @@ import 'package:qdd/routes/routes.dart';
 import 'package:qdd/service/http.dart';
 import 'package:qdd/utils/connectivity_qdd_util.dart';
 import 'package:qdd/utils/device_info_util.dart';
+import 'package:qdd/utils/package_qdd_util.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -23,8 +24,10 @@ class _HomePageState extends State<HomePage> {
   StreamSubscription<ConnectivityResult> _subscription;
 
   @override
-  void initState() {
+  void initState()  {
     super.initState();
+
+
 
 //    var data = Http.get("http://www.phonegap100.com/appapi.php" , queryParameters: {
 //      "a" : "getPortalList" ,
@@ -34,7 +37,7 @@ class _HomePageState extends State<HomePage> {
 //    var data = Http.get(ServiceUrl.home);
 //    print(data);
 
-    this._getProductData();
+//    this._getProductData();
 
     /// 检测网络信号
     _subscription = Connectivity()

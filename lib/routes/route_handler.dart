@@ -1,7 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:qdd/pages/home_page.dart';
-import 'package:qdd/pages/splash_page.dart';
+import 'package:qdd/pages/index_page.dart';
 import 'package:qdd/pages/test2_page.dart';
 import 'package:qdd/pages/test_page.dart';
 import 'package:qdd/utils/fluro_conver_util.dart';
@@ -9,7 +9,7 @@ import 'package:qdd/utils/fluro_conver_util.dart';
 ///跳转到首页
 Handler splashHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return SplashPage();
+  return IndexPage();
 });
 
 /// 跳转到主页
