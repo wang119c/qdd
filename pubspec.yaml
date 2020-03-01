@@ -35,6 +35,10 @@ dependencies:
   provider: ^4.0.4
   dio: ^3.0.9
   webview_flutter: ^0.1.1
+  splashscreen: ^1.2.0
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -83,3 +87,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: CustomIcons
+      fonts:
+        - asset: assets/fonts/CustomIcons.ttf

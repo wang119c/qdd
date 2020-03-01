@@ -91,6 +91,12 @@ class _HomePageState extends State<HomePage> {
               Navigator.push(context,
                   new MaterialPageRoute(builder: (context) => new Test3Page()));
             },
+          ),
+          FlatButton(
+            child: Text("登录"),
+            onPressed: () {
+              NavigatorQdd.goLoginPage(context);
+            },
           )
         ],
       ),

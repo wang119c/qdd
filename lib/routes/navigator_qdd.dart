@@ -24,16 +24,27 @@ class NavigatorQdd {
         replace: true, transition: TransitionType.fadeIn);
   }
 
+  /// 跳转到登录
+  static void goLoginPage(BuildContext context) {
+    Application.router.navigateTo(context, Routes.login,
+        replace: false, transition: TransitionType.fadeIn);
+  }
+
   //跳转到无参数页面
-  static void goTestPage(BuildContext context ){
-    Application.router.navigateTo(context, Routes.test,transition: TransitionType.inFromRight);
+  static void goTestPage(BuildContext context) {
+    Application.router.navigateTo(context, Routes.test,
+        transition: TransitionType.inFromRight);
   }
 
-  static void goTest2Page(BuildContext context ,  String  name , int  age , double score , bool sex , Person person  ){
+  static void goTest2Page(BuildContext context, String name, int age,
+      double score, bool sex, Person person) {
     String personjson = FluroConvertUtils.object2string(person);
-    Application.router.navigateTo(context, Routes.test2 + "?name=${name}&age=${age}&score=${score}&sex=${sex}&personjson=${personjson}", transition:  TransitionType.inFromRight);
+    Application.router.navigateTo(
+        context,
+        Routes.test2 +
+            "?name=${name}&age=${age}&score=${score}&sex=${sex}&personjson=${personjson}",
+        transition: TransitionType.inFromRight);
   }
-
 
 //  /// 跳转到 传参demo 页面
 //  static void goDemoParamsPage(BuildContext context, String name, int age,

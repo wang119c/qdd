@@ -2,6 +2,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:qdd/pages/home_page.dart';
 import 'package:qdd/pages/index_page.dart';
+import 'package:qdd/pages/login_page.dart';
 import 'package:qdd/pages/test2_page.dart';
 import 'package:qdd/pages/test_page.dart';
 import 'package:qdd/utils/fluro_conver_util.dart';
@@ -16,6 +17,12 @@ Handler splashHandler = new Handler(
 Handler homeHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return HomePage();
+});
+
+/// 跳转到登录
+Handler loginHandler = new Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return LoginPage();
 });
 
 Handler testHandler = new Handler(
