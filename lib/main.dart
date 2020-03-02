@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (_) => Cart(),
-          ),
+          )
         ],
         child: MaterialApp(
           title: 'Flutter Demo',
