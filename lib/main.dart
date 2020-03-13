@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:qdd/providers/cart.dart';
@@ -12,7 +13,11 @@ void main() {
   Routes.configureRoutes(router);
   Application.router = router;
 
-  runApp(MyApp());
+  /// 禁止横屏
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp  , DeviceOrientation.portraitDown]).then( (_) {
+    runApp(MyApp());
+  }) ;
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +33,7 @@ class MyApp extends StatelessWidget {
           )
         ],
         child: MaterialApp(
-          title: 'Flutter Demo',
+          title: '签多多',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
