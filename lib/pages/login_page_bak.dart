@@ -5,24 +5,21 @@ import 'package:qdd/widgets/social_icon.dart';
 
 
 /// 登录页面
-class LoginPage extends StatefulWidget {
+class LoginPageBak extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginPageBakState createState() => _LoginPageBakState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageBakState extends State<LoginPageBak> {
   @override
   Widget build(BuildContext context) {
     ScreenQddUtil.init(context);
     return Scaffold(
-      backgroundColor: Color(0xff7e59cb),
-      resizeToAvoidBottomPadding: true,
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomPadding: false,
       body: Stack(
         fit: StackFit.expand,
-        children: <Widget>[
-          Bg(),
-          Form()
-        ],
+        children: <Widget>[Bg(), Form()],
       ),
     );
   }

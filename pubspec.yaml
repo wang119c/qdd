@@ -36,6 +36,7 @@ dependencies:
   dio: ^3.0.9
   webview_flutter: ^0.1.1
   splashscreen: ^1.2.0
+  flutter_native_splash: ^0.1.9
 
 
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qdd/pages/guide_page.dart';
 import 'package:qdd/pages/home_page.dart';
+import 'package:qdd/pages/login_page.dart';
 import 'package:qdd/pages/splash_page.dart';
 import 'package:qdd/utils/constant_util.dart';
 import 'package:qdd/utils/package_qdd_util.dart';
@@ -30,11 +31,20 @@ class _IndexPageState extends State<IndexPage> {
         indexPage = GuidePage();
       });
     } else {
-      //启动启动页及广告页面
+      String token = await StorageQddUtil.getString(USER_TOKEN);
       setState(() {
-        indexPage = SplashPage();
-//        indexPage = HomePage() ;
+        //这里面判断是否登录
+        if (token == null) {
+          indexPage = LoginPage();
+        } else {
+          indexPage = HomePage();
+        }
       });
+
+      //启动启动页及广告页面
+//      setState(() {
+//        indexPage = SplashPage();
+//        });
     }
   }
 

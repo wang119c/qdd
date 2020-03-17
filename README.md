@@ -35,6 +35,10 @@
 
 
 
+##  flutter_native_splash
+flutter pub pub run flutter_native_splash:create
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

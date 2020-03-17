@@ -4,24 +4,25 @@ import 'package:qdd/routes/application.dart';
 import 'package:qdd/routes/routes.dart';
 import 'package:qdd/utils/constant_util.dart';
 import 'package:qdd/utils/package_qdd_util.dart';
+import 'package:qdd/utils/screen_qdd_util.dart';
 import 'package:qdd/utils/storage_qdd_util.dart';
 
 final sliderArrayList = [
   Slider(
       sliderImageUrl: 'assets/images/slider_1.png',
-      sliderHeading: 'Easy Exchange!',
-      sliderSubHeading:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies, erat vitae porta consequat.'),
+      sliderHeading: '便捷',
+      sliderSubHeading: '随时随地签署文件,无需打印寄送',
+      sliderBg: 'assets/images/slider_bg_1.png'),
   Slider(
       sliderImageUrl: 'assets/images/slider_2.png',
-      sliderHeading: 'Easy to Use!',
-      sliderSubHeading:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies, erat vitae porta consequat.'),
+      sliderHeading: '安全',
+      sliderSubHeading: 'ISO27001信息安全认证、工信部ICP许可、国家密码管理局许可、保险公司承担',
+      sliderBg: 'assets/images/slider_bg_2.png'),
   Slider(
       sliderImageUrl: 'assets/images/slider_3.png',
-      sliderHeading: 'Connect with Others',
-      sliderSubHeading:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies, erat vitae porta consequat.'),
+      sliderHeading: '合规',
+      sliderSubHeading: '依据《中华人民共和国电子签名法》、采用权威CA机构数字证书认证、防篡改电子签名',
+      sliderBg: 'assets/images/slider_bg_3.png'),
 ];
 
 /// 引导页
@@ -55,28 +56,48 @@ class _GuidePageState extends State<GuidePage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenQddUtil.init(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xff7e59cb),
       body: Container(
-        child: Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Stack(
-            alignment: AlignmentDirectional.bottomCenter,
-            children: <Widget>[
-              PageView.builder(
-                itemCount: sliderArrayList.length,
-                itemBuilder: (context, i) {
-                  return SliderItem(i);
-                },
-                scrollDirection: Axis.horizontal,
-                controller: _pageController,
-                onPageChanged: _onPageChanged,
-              ),
-              _bottomStack()
-            ],
-          ),
+        child: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: <Widget>[
+            PageView.builder(
+              itemCount: sliderArrayList.length,
+              itemBuilder: (context, i) {
+                return SliderItem(i);
+              },
+              scrollDirection: Axis.horizontal,
+              controller: _pageController,
+              onPageChanged: _onPageChanged,
+            ),
+            _sliderDots()
+          ],
         ),
       ),
+    );
+  }
+
+  _sliderDots() {
+    return Stack(
+      alignment: AlignmentDirectional.topStart,
+      children: <Widget>[
+        Container(
+          alignment: AlignmentDirectional.bottomCenter,
+          margin: EdgeInsets.only(bottom: ScreenQddUtil.setHeight(100)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: sliderArrayList.map((value) {
+              if (_currentPage == sliderArrayList.indexOf(value)) {
+                return SliderDots(true);
+              } else {
+                return SliderDots(false);
+              }
+            }).toList(),
+          ),
+        )
+      ],
     );
   }
 
@@ -143,8 +164,8 @@ class _GuidePageState extends State<GuidePage> {
   }
 
   _saveStorageVersion() async {
-     var currentVersion = await PackageQddUtil.version();
-     StorageQddUtil.setString(STORAGE_VERSION, currentVersion);
+    var currentVersion = await PackageQddUtil.version();
+    StorageQddUtil.setString(STORAGE_VERSION, currentVersion);
   }
 
   _jumpButton() {
@@ -162,21 +183,34 @@ class SliderDots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+//    return AnimatedContainer(
+//      duration: Duration(milliseconds: 30),
+//      margin: const EdgeInsets.symmetric(horizontal: 3.3),
+//      height: isActive ? 10 : 6,
+//      width: isActive ? 10 : 6,
+//      decoration: BoxDecoration(
+//          color: isActive ? Colors.white : Colors.grey,
+//          border: isActive
+//              ? Border.all(color: Color(0xff927DFF), width: 2.0)
+//              : Border.all(color: Colors.transparent, width: 1),
+//          borderRadius: BorderRadius.all(Radius.circular(12))),
+//    );
+
     return AnimatedContainer(
       duration: Duration(milliseconds: 30),
-      margin: const EdgeInsets.symmetric(horizontal: 3.3),
-      height: isActive ? 10 : 6,
-      width: isActive ? 10 : 6,
+      margin: EdgeInsets.symmetric(horizontal: 3.3),
+      width: isActive ? ScreenQddUtil.setWidth(64) : ScreenQddUtil.setWidth(20),
+      height: ScreenQddUtil.setWidth(20),
       decoration: BoxDecoration(
-          color: isActive ? Colors.white : Colors.grey,
-          border: isActive
-              ? Border.all(color: Color(0xff927DFF), width: 2.0)
-              : Border.all(color: Colors.transparent, width: 1),
+          color: isActive ? Colors.white : Color.fromRGBO(255, 255, 255, 0.7),
           borderRadius: BorderRadius.all(Radius.circular(12))),
     );
   }
 }
 
+
+
+/// 滑动块的单个状态
 class SliderItem extends StatelessWidget {
   final int index;
 
@@ -184,41 +218,72 @@ class SliderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          width: MediaQuery.of(context).size.width * 0.6,
-          height: MediaQuery.of(context).size.height * 0.4,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(sliderArrayList[index].sliderImageUrl))),
-        ),
-        SizedBox(
-          height: 60.0,
-        ),
-        Text(
-          sliderArrayList[index].sliderHeading,
-          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20.5),
-        ),
-        SizedBox(
-          height: 15.0,
-        ),
-        Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40.0),
-            child: Text(
-              sliderArrayList[index].sliderSubHeading,
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: 1.5,
-                  fontSize: 12.5),
-              textAlign: TextAlign.center,
-            ),
+    return index == sliderArrayList.length - 1
+        ? GestureDetector(
+            child: _containerBody(index),
+            onTap: () {
+              //保存当前的version 到 storage , 并且跳转到登录
+              _saveStorageVersion();
+              Application.router
+                  .navigateTo(context, Routes.home, replace: true);
+            },
+          )
+        : _containerBody(index);
+  }
+
+  _saveStorageVersion() async {
+    var currentVersion = await PackageQddUtil.version();
+    StorageQddUtil.setString(STORAGE_VERSION, currentVersion);
+  }
+
+  _containerBody(index) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(sliderArrayList[index].sliderBg))),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+//            width: MediaQuery.of(context).size.width * 0.6,
+//            height: MediaQuery.of(context).size.height * 0.4,
+            width: ScreenQddUtil.setWidth(128),
+            height: ScreenQddUtil.setWidth(128),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(sliderArrayList[index].sliderImageUrl))),
           ),
-        )
-      ],
+          SizedBox(
+            height: ScreenQddUtil.setHeight(40),
+          ),
+          Text(
+            sliderArrayList[index].sliderHeading,
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: ScreenQddUtil.setSp(48),
+                color: Color(0xffffffff)),
+          ),
+          SizedBox(
+            height: ScreenQddUtil.setHeight(15),
+          ),
+          Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40.0),
+              child: Text(
+                sliderArrayList[index].sliderSubHeading,
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 1.5,
+                    fontSize: ScreenQddUtil.setSp(28),
+                    color: Color.fromRGBO(255, 255, 255, 0.7)),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -227,9 +292,11 @@ class Slider {
   final String sliderImageUrl;
   final String sliderHeading;
   final String sliderSubHeading;
+  final String sliderBg;
 
   Slider(
       {@required this.sliderImageUrl,
       @required this.sliderHeading,
-      @required this.sliderSubHeading});
+      @required this.sliderSubHeading,
+      @required this.sliderBg});
 }
