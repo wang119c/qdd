@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:qdd/utils/screen_qdd_util.dart';
-import 'package:qdd/widgets/form_card.dart';
 import 'package:qdd/widgets/social_icon.dart';
 
 
@@ -93,7 +92,7 @@ class _FormState extends State<Form> {
             SizedBox(
               height: ScreenQddUtil.setHeight(180),
             ),
-            FormCard(),
+//            FormCard(),
             SizedBox(
               height: ScreenQddUtil.setHeight(40),
             ),
