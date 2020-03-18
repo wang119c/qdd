@@ -9,6 +9,9 @@ class Routes {
   static String root = "/";
   static String home = "home";
   static String login = "login";
+  static String find_pwd = "find_pwd" ;
+  static String find_pwd_next = "find_pwd_next";
+  static String reg = "reg" ;
   static String test = "test";
   static String test2 = "test2" ;
 
@@ -22,6 +25,9 @@ class Routes {
     router.define(root, handler: splashHandler);
     router.define(home, handler: homeHandler);
     router.define(login, handler: loginHandler);
+    router.define(reg, handler: regHandler) ;
+    router.define(find_pwd, handler: findPwdHandler);
+    router.define(find_pwd_next, handler: findPwdNextHandler) ;
     router.define(test, handler: testHandler);
     router.define(test2, handler: test2Handler);
   }

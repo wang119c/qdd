@@ -30,6 +30,24 @@ class NavigatorQdd {
         replace: false, transition: TransitionType.fadeIn);
   }
 
+  /// 跳转到注册
+  static void goRegPage(BuildContext context) {
+    Application.router.navigateTo(context, Routes.reg,
+        replace: false, transition: TransitionType.fadeIn);
+  }
+
+  /// 跳转到找回密码
+  static void goFindPwdPage(BuildContext context) {
+    Application.router.navigateTo(context, Routes.find_pwd,
+        replace: false, transition: TransitionType.fadeIn);
+  }
+
+  /// 跳转到找回密码下一步
+  static void goFindPwdNextPage(BuildContext context) {
+    Application.router.navigateTo(context, Routes.find_pwd_next,
+        replace: false, transition: TransitionType.fadeIn);
+  }
+
   //跳转到无参数页面
   static void goTestPage(BuildContext context) {
     Application.router.navigateTo(context, Routes.test,

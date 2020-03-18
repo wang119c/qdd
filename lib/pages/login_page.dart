@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qdd/routes/navigator_qdd.dart';
 import 'package:qdd/utils/screen_qdd_util.dart';
 import 'package:qdd/widgets/en_text_field.dart';
 import 'package:qdd/widgets/login_or_reg.dart';
@@ -61,6 +62,7 @@ class Form extends StatefulWidget {
 
 class _FormState extends State<Form> {
   bool _isSelected = true;
+
   _radio() {
     setState(() {
       _isSelected = !_isSelected;
@@ -102,31 +104,31 @@ class _FormState extends State<Form> {
     );
   }
 
-  Widget horizontalLine() => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: Container(
-          width: ScreenQddUtil.setWidth(120),
-          height: 1.0,
-          color: Colors.black26.withOpacity(0.2),
-        ),
-      );
-
-  Widget radioButton(bool isSelected) => Container(
-        width: 16.0,
-        height: 16.0,
-        padding: EdgeInsets.all(2.0),
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(width: 2.0, color: Colors.black)),
-        child: isSelected
-            ? Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.black),
-              )
-            : Container(),
-      );
+//  Widget horizontalLine() => Padding(
+//        padding: EdgeInsets.symmetric(horizontal: 16.0),
+//        child: Container(
+//          width: ScreenQddUtil.setWidth(120),
+//          height: 1.0,
+//          color: Colors.black26.withOpacity(0.2),
+//        ),
+//      );
+//
+//  Widget radioButton(bool isSelected) => Container(
+//        width: 16.0,
+//        height: 16.0,
+//        padding: EdgeInsets.all(2.0),
+//        decoration: BoxDecoration(
+//            shape: BoxShape.circle,
+//            border: Border.all(width: 2.0, color: Colors.black)),
+//        child: isSelected
+//            ? Container(
+//                width: double.infinity,
+//                height: double.infinity,
+//                decoration:
+//                    BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+//              )
+//            : Container(),
+//      );
 }
 
 /// form 表单
@@ -155,16 +157,14 @@ class FormCard extends StatelessWidget {
                 left: ScreenQddUtil.setWidth(32),
                 right: ScreenQddUtil.setWidth(32),
                 top: ScreenQddUtil.setHeight(80)),
-            child: _formLogin()));
+            child: _formLogin(context)));
   }
 
-  Widget _formLogin() {
+  Widget _formLogin(context) {
     return SingleChildScrollView(
+      physics: NeverScrollableScrollPhysics(),
       child: Column(
         children: <Widget>[
-          SizedBox(
-            height: ScreenQddUtil.setHeight(20),
-          ),
           SizedBox(
             height: ScreenQddUtil.setHeight(20),
           ),
@@ -183,18 +183,17 @@ class FormCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               TapButton(
-                content: '账号注册',
-                callback: () {
-                  print('账号注册');
-                },
-              ),
+                  content: '账号注册',
+                  callback: () {
+                    NavigatorQdd.goRegPage(context);
+                  }),
               SizedBox(
                 width: ScreenQddUtil.setWidth(10),
               ),
               TapButton(
                 content: '忘记密码',
                 callback: () {
-                  print('忘记密码');
+                  NavigatorQdd.goFindPwdPage(context);
                 },
               ),
             ],

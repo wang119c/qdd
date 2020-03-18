@@ -1,8 +1,11 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:qdd/pages/find_pwd_next_page.dart';
+import 'package:qdd/pages/find_pwd_page.dart';
 import 'package:qdd/pages/home_page.dart';
 import 'package:qdd/pages/index_page.dart';
 import 'package:qdd/pages/login_page.dart';
+import 'package:qdd/pages/reg_page.dart';
 import 'package:qdd/pages/test2_page.dart';
 import 'package:qdd/pages/test_page.dart';
 import 'package:qdd/utils/fluro_conver_util.dart';
@@ -24,6 +27,28 @@ Handler loginHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return LoginPage();
 });
+
+/// 跳转到注册
+Handler regHandler = new Handler(
+  handlerFunc: (BuildContext context , Map<String , List<String>> params) {
+    return RegPage() ;
+  }
+);
+
+/// 跳转到找回密码
+Handler findPwdHandler = new Handler(
+  handlerFunc: (BuildContext context , Map<String , List<String>> params){
+    return FindPwdPage();
+  }
+ );
+
+/// 跳转到找回密码下一步
+Handler findPwdNextHandler = new Handler(
+   handlerFunc: (BuildContext context , Map<String , List<String>> params){
+     return FindPwdNextPage();
+   }
+);
+
 
 Handler testHandler = new Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
